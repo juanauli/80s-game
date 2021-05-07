@@ -13,6 +13,7 @@ export default class FgScene extends Phaser.Scene {
 
     this.fireLaser = this.fireLaser.bind(this);
     this.hit = this.hit.bind(this);
+    this.processCollide = this.processCollide.bind(this);
   }
 
   preload() {
@@ -22,7 +23,8 @@ export default class FgScene extends Phaser.Scene {
       frameWidth: 340,
       frameHeight: 460,
     });
-    this.load.image('ground', 'assets/sprites/ground.png');
+    // this.load.image('ground', 'assets/sprites/ground.png');
+    this.load.image('ground', 'assets/sprites/ground-juan-test.png');
 
     this.load.image('brandon', 'assets/sprites/brandon.png');
 
@@ -42,15 +44,26 @@ export default class FgScene extends Phaser.Scene {
     this.groundGroup.create(x, y, 'ground');
   }
 
+  processCollide() {
+    console.log("Dude, stop it!")
+  }
+
   create() {
     // Create game entities
     // << CREATE GAME ENTITIES HERE >>
     this.player = new Player(this, 60, 400, 'josh').setScale(0.25);
+    // this.player = new Player(this, 60, 600, 'josh').setScale(0.25);
+    const cam = this.cameras.main;
+    cam.startFollow(this.player);
+    cam.setBounds(0, 0, 1920*4, 600)
 
     this.groundGroup = this.physics.add.staticGroup({ classType: Ground });
 
-    this.createGround(160, 540);
-    this.createGround(600, 540);
+    // this.createGround(160, 560);
+    // this.createGround(600, 560);
+    this.createGround(0, 600);
+    this.createGround(1940, 600);
+
     this.physics.add.collider(this.player, this.groundGroup)
     this.cursors = this.input.keyboard.createCursorKeys();
     this.createAnimations();
@@ -60,7 +73,7 @@ export default class FgScene extends Phaser.Scene {
 
     // ...
     this.physics.add.collider(this.enemy, this.groundGroup);
-    this.physics.add.collider(this.player, this.enemy);
+    this.physics.add.collider(this.player, this.enemy, this.processCollide);
 
     this.gun = new gun(this, 300, 400, 'gun').setScale(0.25);
 

@@ -14,10 +14,12 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
   updateMovement(cursors) {
     // Move left
+    const cam = this.scene.cameras.main;
     if (cursors.left.isDown) {
       if (!this.facingLeft) {
         this.flipX = !this.flipX;
         this.facingLeft = true;
+
       }
       this.setVelocityX(-360);
       if (this.body.touching.down) {
