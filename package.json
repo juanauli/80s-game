@@ -4,14 +4,20 @@
   "description": "A workshop for getting started with Phaser",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "npx webpack --config webpack.config.js",
+    "start-dev": "npm run build-watch & nodemon server",
+    "build-watch": "webpack -w"
   },
   "dependencies": {
-    "phaser": "^3.15.1"
+    "phaser": "^3.15.1",
+    "socket.io": "^4.0.2",
+    "socket.io-client": "^4.0.2"
   },
   "devDependencies": {
     "raw-loader": "^0.5.1",
     "webpack": "^3.4.1",
+    "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^2.11.0"
   }
 }

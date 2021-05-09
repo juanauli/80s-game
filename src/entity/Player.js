@@ -2,13 +2,14 @@ import 'phaser';
 import { GetSpeed } from 'phaser/src/math';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, y, spriteKey) {
+  constructor(scene, x, y, spriteKey, socket) {
     super(scene, x, y, spriteKey);
     this.scene = scene;
     this.scene.add.existing(this);
     this.scene.physics.world.enable(this);
     this.facingLeft = false;
     this.armed = false;
+    this.socket = socket
     // << INITIALIZE PLAYER ATTRIBUTES HERE >>
   }
 
@@ -50,6 +51,23 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.anims.play('idleArmed');
       }
     }
+
+     //emit any movement
+     let x = this.x
+     let y = this.y
+     if (
+       this.oldPosition && (x!=this.oldPosition.x ||
+       y!== this.oldPosition.y)
+     ) {
+       this.socket.emit("playerMovement", {
+         x: this.x,
+         y: this.y
+       })
+     }
+     this.oldPosition = {
+       x: this.x, 
+       y: this.y
+     }
   }
 
   // Check which controller button is being pushed and execute movement & animation
