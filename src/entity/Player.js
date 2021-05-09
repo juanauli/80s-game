@@ -1,5 +1,5 @@
 import 'phaser';
-import FgScene from '../scenes/FgScene';
+import { GetSpeed } from 'phaser/src/math';
 
 export default class Player extends Phaser.Physics.Arcade.Sprite {
   constructor(scene, x, y, spriteKey) {
@@ -13,8 +13,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
   }
 
   updateMovement(cursors) {
-    // Move left
     const cam = this.scene.cameras.main;
+    const speed = 3;
+    // Move left
     if (cursors.left.isDown) {
       if (!this.facingLeft) {
         this.flipX = !this.flipX;
@@ -22,6 +23,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
       }
       this.setVelocityX(-360);
+      cam.scrollX -= speed;
       if (this.body.touching.down) {
         this.play('run', true);
       }
@@ -33,7 +35,7 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
         this.facingLeft = false;
       }
       this.setVelocityX(360);
-
+      cam.scrollX += speed;
       if (this.body.touching.down) {
         this.play('run', true);
       }

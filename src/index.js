@@ -15,8 +15,10 @@ But this hasn't happened yet!
 // Bring in all the scenes
 import 'phaser';
 import config from './config/config'
-import BgScene from './scenes/BgScene';
-import FgScene from './scenes/FgScene';
+import SynthwaveScene from './scenes/SynthwaveScene';
+import NeonAlleyScene from './scenes/NeonAlleyScene';
+import MoonlightScene from './scenes/MoonlightScene';
+import SkyLineScene from './scenes/SkyLineScene';
 import MainScene from './scenes/MainScene'
 
 class Game extends Phaser.Game {
@@ -26,8 +28,10 @@ class Game extends Phaser.Game {
 
     // Add all the scenes
     // << ADD ALL SCENES HERE >>
-    this.scene.add('BgScene', BgScene)
-    this.scene.add('FgScene', FgScene)
+    this.scene.add('SynthwaveScene', SynthwaveScene)
+    this.scene.add('NeonAlleyScene', NeonAlleyScene)
+    this.scene.add('MoonlightScene', MoonlightScene)
+    this.scene.add('SkyLineScene', SkyLineScene)
     this.scene.add('MainScene', MainScene)
     // Start the game with the mainscene
     this.scene.start('MainScene')

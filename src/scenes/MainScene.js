@@ -1,6 +1,8 @@
 import 'phaser'
-import BgScene from './BgScene';
-import FgScene from './FgScene';
+import SynthwaveScene from './SynthwaveScene';
+import NeonAlleyScene from './NeonAlleyScene';
+import MoonlightScene from './MoonlightScene';
+import SkyLineScene from './SkyLineScene';
 
 export default class MainScene extends Phaser.Scene {
   constructor() {
@@ -8,9 +10,11 @@ export default class MainScene extends Phaser.Scene {
   }
 
   create() {
-    // << LOAD BACKGROUND AND FOREGROUND SCENES IN PARALLEL HERE >>
-    this.scene.launch('BgScene');
-    this.scene.launch('FgScene');
+    // Launch scene here
+    this.scene.launch('SynthwaveScene');
+    // this.scene.launch('NeonAlleyScene');
+    // this.scene.launch('MoonlightScene');
+    // this.scene.launch('SkyLineScene');
 
   }
 }
